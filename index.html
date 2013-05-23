@@ -14,21 +14,312 @@
         <link rel="stylesheet" href="css/main.css">
 
         <script src="js/vendor/modernizr-2.6.2.min.js"></script>
-        <script src="js/bs.js"></script>
+
     </head>
     <body>
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
+				<H1>JS BATTLESHIPS</H1>
+				<div class="game_board">
+        <table class="player">
+        	<tr class="header">
+        		<td class="empty"></td>
+        		<td>1</td>
+        		<td>2</td>
+        		<td>3</td>
+        		<td>4</td>
+        		<td>5</td>
+        		<td>6</td>
+        		<td>7</td>
+        		<td>8</td>
+        		<td>9</td>
+        		<td>10</td>
+        	</tr>
+        	<tr class="A">
+        		<td>A</td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        	</tr>
+        	<tr class="B">
+        		<td>B</td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        	</tr>
+        	<tr>
+        		<td>C</td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        	</tr>
+        	<tr>
+        		<td>D</td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        	</tr>
+        	<tr>
+        		<td>E</td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        	</tr>
+        	<tr>
+        		<td>F</td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        	</tr>
+        	<tr>
+        		<td>G</td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        	</tr>
+        	<tr>
+        		<td>H</td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        	</tr>
+        	<tr>
+        		<td>I</td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        	</tr>
+        	<tr class="bottom_row">
+        		<td>J</td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        	</tr>
+        </table>
 
-        <p>JS Battleship</p>
-
+        <table class="enemy">
+        	<tr class="header">
+        		<td class="empty"></td>
+        		<td>1</td>
+        		<td>2</td>
+        		<td>3</td>
+        		<td>4</td>
+        		<td>5</td>
+        		<td>6</td>
+        		<td>7</td>
+        		<td>8</td>
+        		<td>9</td>
+        		<td>10</td>
+        	</tr>
+        	<tr class="A">
+        		<td>A</td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        	</tr>
+        	<tr class="B">
+        		<td>B</td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        	</tr>
+        	<tr>
+        		<td>C</td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        	</tr>
+        	<tr>
+        		<td>D</td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        	</tr>
+        	<tr>
+        		<td>E</td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        	</tr>
+        	<tr>
+        		<td>F</td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        	</tr>
+        	<tr>
+        		<td>G</td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        	</tr>
+        	<tr>
+        		<td>H</td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        	</tr>
+        	<tr>
+        		<td>I</td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        	</tr>
+        	<tr class="bottom_row">
+        		<td>J</td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        	</tr>
+        </table>
+      </div>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
 
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
-
+        <script src="js/bs.js"></script>
         <script>
             var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
             (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
