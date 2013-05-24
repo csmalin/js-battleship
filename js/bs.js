@@ -1,4 +1,10 @@
 $(document).ready(function(){
+	window.app = {
+		mode: "setup",
+		player_ships: [],
+		current_ship_type: null,
+		current_ship: []
+	};
 	ship_placement();
 });
 
@@ -7,6 +13,7 @@ $(document).ready(function(){
 //  "max_size": max_size
 // }
 
+// TODO: move to app namespace.
 var ship_types = { aircraft_carrier: {size: 5, quantity: 1},
 									 battleship: {size: 4, quantity: 1},
 									 submarine: {size: 3, quantity: 1},
@@ -14,18 +21,32 @@ var ship_types = { aircraft_carrier: {size: 5, quantity: 1},
 									 patrol_boat: {size: 2, quantity: 2}};
 
 
+// creates an mouse listener that adds cell to a ship until complete.
 function ship_placement(){
-	// NOTE: this variable has suspect scope
-	var ship_in_construction = [];
-
 	$('table.player td').on('mousedown', function(e){
 		var cell = $(e)[0].target;
 		var row = cell.parentElement.rowIndex;
 		var col = cell.cellIndex;
-  	if (is_board_cell(row, col) && ((ship_in_construction.length === 0) || (has_unplaced_piece(ship_in_construction) && is_connected(ship_in_construction, row, col) && is_same_axis(ship_in_construction, row, col)))) {
+
+		// we aren't in ship placement mode
+		if (!app.current_ship_type){
+			return;
+		}
+
+		// this cell isn't valid
+		if (is_board_cell(row, col)){
+			return;
+		}
+
+  	if (app.current_ship.length === 0 || is_legal_move(row, col)) {
 			$(cell).css("background-color", "#000");
 			console.log("added another point!");
-			ship_in_construction.push([row, col]);
+			app.current_ship.push([row, col]);
+
+			if (!has_unplaced_piece(app.current_ship)){
+				app.player_ships.push(app.current_ship);
+				app.current_ship_type = null;
+			}
 		}
 	});
 }
@@ -35,10 +56,13 @@ function is_board_cell(row, col){
 	return row > 0 && col > 0;
 }
 
+function is_legal_move(row, col){
+  return has_unplaced_piece(app.current_ship, app.current_ship_type) && is_connected(app.current_ship, row, col) && is_same_axis(app.current_ship, row, col);
+}
+
 //only place positions based on the size of the ship
-// TODO: currently, we only support ship of size 5
-function has_unplaced_piece(ship){
-	return ship.length > 0 && ship.length < 5;
+function has_unplaced_piece(ship, type){
+	return ship.length > 0 && ship.length < ship_types[type].size;
 }
 
 // returns true if at least one cell is adjacent to row/col
