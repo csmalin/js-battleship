@@ -25,7 +25,7 @@ function ship_placement(){
 		if (row > 0 && col > 0) { 
 
 			if (ship_1.length > 0 && ship_1.length < 5) {
-				var connected = false;
+				var legal = false;
 				for (i=0; i < ship_1.length; i++){
 					console.log("comparing (" + ship_1[i][0] + "," + ship_1[0][1] + ") to (" + row + "," + col + ")");
 
@@ -60,15 +60,15 @@ function ship_placement(){
 						console.log("y_same:" + y_same);
 
 						if (ship_1.length < 2 || same_axis == true) {
-							connected = true;
-							console.log("connected...");
+							legal = true;
+							console.log("legal...");
 						}
 
 					}
 				}
 			}
 
-			if ((ship_1.length === 0) || (connected == true)) {
+			if ((ship_1.length === 0) || (legal && connected(ship_1, row, col))) {
 				$(cell).css("background-color", "#000");
 				console.log("added another point!");
 				ship_1.push([row, col]);
@@ -77,3 +77,18 @@ function ship_placement(){
 	});
 }
 
+
+// returns true if at least one cell is adjacent to row/col
+function connected(ship, row, col){
+	for (i=0; i < ship.length; i++){
+		console.log("comparing (" + ship[i][0] + "," + ship[0][1] + ") to (" + row + "," + col + ")");
+
+		var abs_x = Math.abs(ship[i][0] - row);
+		var abs_y = Math.abs(ship[i][1] - col);			
+		
+		if ((abs_x + abs_y) == 1){
+			return true;
+		}			
+  }
+  return false;
+}
