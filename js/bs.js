@@ -2,10 +2,10 @@ $(document).ready(function(){
 	ship_placement();
 });
 
-var ship(max_size) = {
- "positions": [],
- "max_size": max_size
-}
+// var ship(max_size) = {
+//  "positions": [],
+//  "max_size": max_size
+// }
 
 var ship_types = { aircraft_carrier: {size: 5, quantity: 1},
 									 battleship: {size: 4, quantity: 1},
@@ -15,22 +15,24 @@ var ship_types = { aircraft_carrier: {size: 5, quantity: 1},
 
 
 function ship_placement(){
-	var ship_1 = []
+	// NOTE: this variable has suspect scope
+	var ship_in_construction = [];
 
 	$('table.player td').on('mousedown', function(e){
-		var cell = $(e)[0].target 
-		var row = cell.parentElement.rowIndex; //gets the "index" of the row in the table that was clicked
+		var cell = $(e)[0].target;
+		var row = cell.parentElement.rowIndex;
 		var col = cell.cellIndex;
-
-		if (row > 0 && col > 0) { 
-
-			if ((ship_1.length === 0) || (has_unplaced_piece(ship_1) && is_connected(ship_1, row, col) && is_same_axis(ship_1, row, col))) {
-				$(cell).css("background-color", "#000");
-				console.log("added another point!");
-				ship_1.push([row, col]);
-			}
-		};
+  	if (is_board_cell(row, col) && ((ship_in_construction.length === 0) || (has_unplaced_piece(ship_in_construction) && is_connected(ship_in_construction, row, col) && is_same_axis(ship_in_construction, row, col)))) {
+			$(cell).css("background-color", "#000");
+			console.log("added another point!");
+			ship_in_construction.push([row, col]);
+		}
 	});
+}
+
+// returns true if the cell isn't part of the headers
+function is_board_cell(row, col){
+	return row > 0 && col > 0;
 }
 
 //only place positions based on the size of the ship
