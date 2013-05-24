@@ -24,51 +24,7 @@ function ship_placement(){
 
 		if (row > 0 && col > 0) { 
 
-			if (ship_1.length > 0 && ship_1.length < 5) {
-				var same_axis = false;
-				for (i=0; i < ship_1.length; i++){
-					console.log("comparing (" + ship_1[i][0] + "," + ship_1[0][1] + ") to (" + row + "," + col + ")");
-
-					var abs_x = Math.abs(ship_1[i][0] - row);
-					var abs_y = Math.abs(ship_1[i][1] - col);
-
-					if ((abs_x + abs_y) == 1){
-						var same_axis = false;
-						var x_same = true;
-						var y_same = true;
-						var prev_x = null;
-						var prev_y = null;
-
-						for(i=0; i < ship_1.length; i++){
-							if (i > 0) {
-								if ((ship_1[i][0] != prev_x) || (ship_1[i][0] != row)){
-									x_same = false;
-								}
-								if ((ship_1[i][1] != prev_y) || (ship_1[i][1] != col)){
-									y_same = false;
-								}
-							}
-
-							prev_x = ship_1[i][0];
-							prev_y = ship_1[i][1];
-						}
-						if (x_same || y_same) {
-							same_axis = true;
-						}
-
-						console.log("x_same:" + x_same);
-						console.log("y_same:" + y_same);
-
-						if (ship_1.length < 2 || same_axis == true) {
-							same_axis = true;
-							console.log("same_axis...");
-						}
-
-					}
-				}
-			}
-
-			if ((ship_1.length === 0) || (same_axis && is_connected(ship_1, row, col))) {
+			if ((ship_1.length === 0) || (has_unplaced_piece(ship_1) && is_connected(ship_1, row, col) && is_same_axis(ship_1, row, col))) {
 				$(cell).css("background-color", "#000");
 				console.log("added another point!");
 				ship_1.push([row, col]);
@@ -77,6 +33,11 @@ function ship_placement(){
 	});
 }
 
+//only place positions based on the size of the ship
+// TODO: currently, we only support ship of size 5
+function has_unplaced_piece(ship){
+	return ship.length > 0 && ship.length < 5;
+}
 
 // returns true if at least one cell is adjacent to row/col
 function is_connected(ship, row, col){
@@ -91,4 +52,43 @@ function is_connected(ship, row, col){
 		}			
   }
   return false;
+}
+
+// returns true if cell is along the same axis as ship
+function is_same_axis(ship, row, col){
+	if (ship.length < 2){
+		// for a ship of length 0 or 1, this is trivially true
+		return true;
+	}
+	
+	var same_axis = false;
+	for (i=0; i < ship.length; i++){
+		console.log("comparing (" + ship[i][0] + "," + ship[0][1] + ") to (" + row + "," + col + ")");
+		var row_same = true;
+		var col_same = true;
+		var prev_row = null;
+		var prev_col = null;
+
+		for(i=0; i < ship.length; i++){
+			if (i > 0) {
+				if ((ship[i][0] != prev_row) || (ship[i][0] != row)){
+					row_same = false;
+				}
+				if ((ship[i][1] != prev_col) || (ship[i][1] != col)){
+					col_same = false;
+				}
+			}
+
+			prev_row = ship[i][0];
+			prev_col = ship[i][1];
+		}
+		if (row_same || col_same) {
+			same_axis = true;
+		}
+
+		console.log("row_same:" + row_same);
+		console.log("col_same:" + col_same);	
+	}
+	return same_axis;
+
 }
