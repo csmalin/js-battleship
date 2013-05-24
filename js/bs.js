@@ -1,12 +1,27 @@
 $(document).ready(function(){
+	ship_placement();
+});
 
+var ship(max_size) = {
+ "positions": [],
+ "max_size": max_size
+}
+
+var ship_types = { aircraft_carrier: {size: 5, quantity: 1},
+									 battleship: {size: 4, quantity: 1},
+									 submarine: {size: 3, quantity: 1},
+									 destroyer: {size: 3, quantity: 2},
+									 patrol_boat: {size: 2, quantity: 2}};
+
+
+function ship_placement(){
 	var ship_1 = []
-	$('td').on('click', function(e){
+
+	$('td').on('mousedown', function(e){
 		var cell = $(e)[0].target
 		var board = cell.parentElement.parentElement.parentElement.className;
 		var row = cell.parentElement.rowIndex;
 		var col = cell.cellIndex;
-		//console.log(board + ": (" + row + "," + col + ")");
 
 		if (row > 0 && col > 0 && board == "player") {
 
@@ -61,7 +76,5 @@ $(document).ready(function(){
 			}
 		};
 	});
-});
-
-
+}
 
