@@ -17,13 +17,12 @@ var ship_types = { aircraft_carrier: {size: 5, quantity: 1},
 function ship_placement(){
 	var ship_1 = []
 
-	$('td').on('mousedown', function(e){
-		var cell = $(e)[0].target
-		var board = cell.parentElement.parentElement.parentElement.className;
-		var row = cell.parentElement.rowIndex;
+	$('table.player td').on('mousedown', function(e){
+		var cell = $(e)[0].target 
+		var row = cell.parentElement.rowIndex; //gets the "index" of the row in the table that was clicked
 		var col = cell.cellIndex;
 
-		if (row > 0 && col > 0 && board == "player") {
+		if (row > 0 && col > 0) { 
 
 			if (ship_1.length > 0 && ship_1.length < 5) {
 				var connected = false;
