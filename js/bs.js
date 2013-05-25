@@ -4,6 +4,7 @@ $(document).ready(function(){
 		player_ships: [],
 		current_ship_type: null,
 		current_ship: []
+		current_ship: [] //don't let anything modify this, if it needs to be changed, it should be done in a method so that method can contain updates to other ui elements
 	};
 	ship_placement();
 });
