@@ -88,6 +88,7 @@ function is_legal_move(row, col){
 // weird: this method uses globals as is args
 // TODO: use app variables
 function has_unplaced_piece(ship, type){
+	console.log(type);
 	return ship.length > 0 && ship.length < ship_types[type].size;
 }
 
