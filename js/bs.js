@@ -3,7 +3,6 @@ $(document).ready(function(){
 		mode: "setup",
 		player_ships: [],
 		current_ship_type: null,
-		current_ship: []
 		current_ship: [] //don't let anything modify this, if it needs to be changed, it should be done in a method so that method can contain updates to other ui elements
 	};
 	// setup mode
@@ -35,11 +34,6 @@ $(document).ready(function(){
 // }
 
 // TODO: move to app namespace.
-var ship_types = { aircraft_carrier: {size: 5, quantity: 1},
-									 battleship: {size: 4, quantity: 1},
-									 submarine: {size: 3, quantity: 1},
-									 destroyer: {size: 3, quantity: 2},
-									 patrol_boat: {size: 2, quantity: 2}};
 var ship_types = { aircraft_carrier: {size: 5, quantity: 1, on_board: 0},
 									 battleship: {size: 4, quantity: 1, on_board: 0},
 									 submarine: {size: 3, quantity: 1, on_board: 0},
@@ -61,7 +55,6 @@ function ship_placement(){
 		}
 
 		// this cell isn't valid
-		if (is_board_cell(row, col)){
 		if (!is_board_cell(row, col)){
 			console.log('not a board cell');
 			return;
@@ -72,7 +65,6 @@ function ship_placement(){
 			console.log("added another point!");
 			app.current_ship.push([row, col]);
 
-			if (!has_unplaced_piece(app.current_ship)){
 			if (!has_unplaced_piece(app.current_ship, app.current_ship_type)){
 				app.player_ships.push(app.current_ship);
 				app.current_ship_type = null;
