@@ -10,6 +10,17 @@ $(document).ready(function(){
 	//   - # of ships to place
 	//   - select ship to place
 	//     - on click, make ship the active ship, do UI indicators
+	$(".ships").on("click", "li", function(e){
+		if (!app.current_ship_type && e.target.className == "selectable"){
+			var quantity_span = $(e.target).find("span")
+			var quantity_remaining = parseInt(quantity_span.html());
+			quantity_span.html(quantity_remaining-1);
+			var type = $(e.target).data("ship-type");
+			app.current_ship_type = type;
+			$('#current_ship_type').html(app.current_ship_type);
+			$('#pieces_remaining').html(ship_types[app.current_ship_type].size - app.current_ship.length)
+		}
+	});
 	ship_placement();
 	// loop until no more ships to place
 
