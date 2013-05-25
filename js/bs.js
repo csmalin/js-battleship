@@ -56,11 +56,14 @@ function ship_placement(){
 
 		// we aren't in ship placement mode
 		if (!app.current_ship_type){
+			console.log('no ship type');
 			return;
 		}
 
 		// this cell isn't valid
 		if (is_board_cell(row, col)){
+		if (!is_board_cell(row, col)){
+			console.log('not a board cell');
 			return;
 		}
 
