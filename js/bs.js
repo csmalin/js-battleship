@@ -73,6 +73,7 @@ function ship_placement(){
 			app.current_ship.push([row, col]);
 
 			if (!has_unplaced_piece(app.current_ship)){
+			if (!has_unplaced_piece(app.current_ship, app.current_ship_type)){
 				app.player_ships.push(app.current_ship);
 				app.current_ship_type = null;
 			}
