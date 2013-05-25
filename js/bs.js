@@ -40,6 +40,11 @@ var ship_types = { aircraft_carrier: {size: 5, quantity: 1},
 									 submarine: {size: 3, quantity: 1},
 									 destroyer: {size: 3, quantity: 2},
 									 patrol_boat: {size: 2, quantity: 2}};
+var ship_types = { aircraft_carrier: {size: 5, quantity: 1, on_board: 0},
+									 battleship: {size: 4, quantity: 1, on_board: 0},
+									 submarine: {size: 3, quantity: 1, on_board: 0},
+									 destroyer: {size: 3, quantity: 2, on_board: 0},
+									 patrol_boat: {size: 2, quantity: 2, on_board: 0}};
 
 
 // creates an mouse listener that adds cell to a ship until complete.
