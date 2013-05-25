@@ -6,7 +6,16 @@ $(document).ready(function(){
 		current_ship: []
 		current_ship: [] //don't let anything modify this, if it needs to be changed, it should be done in a method so that method can contain updates to other ui elements
 	};
+	// setup mode
+	//   - # of ships to place
+	//   - select ship to place
+	//     - on click, make ship the active ship, do UI indicators
 	ship_placement();
+	// loop until no more ships to place
+
+	// randomize placement of enemy ships
+	// difficulty
+	// game play mode
 });
 
 // var ship(max_size) = {
